@@ -1,0 +1,7 @@
+dist/
+public/
+.next/
+**/coverage/
+**/node_modules/
+*.config.js
+.eslintrc.js
