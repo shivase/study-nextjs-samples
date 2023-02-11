@@ -1,76 +1,29 @@
 {
-  "private": true,
+  "name": "udemy-nextjs-13-bootcamp",
+  "version": "0.0.0",
+  "license": "MIT",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "prepare": "husky install",
-    "postinstall": "typesync",
-    "dev": "next dev --turbo",
-    "build": "next build",
-    "start": "next start",
-    "lint": "run-p lint:*",
-    "lint:eslint": "eslint --fix '{src,test}/**/*.{js,jsx,ts,tsx,json,html}'",
-    "lint:prettier": "prettier --no-error-on-unmatched-pattern --write {src,test}/**/*.{json,js,jsx,ts,tsx,md,html}",
-    "lint:css": "stylelint **/*.{css,scss,sass}"
-  },
-  "dependencies": {
-    "clsx": "1.2.1",
-    "next": "13.1.6",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "styled-components": "6.0.0-beta.2",
-    "styled-jsx": "5.1.0",
-    "use-count-up": "3.0.1"
+    "db:generate": "turbo db:generate",
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "start": "turbo run start --parallel",
+    "clean": "turbo run clean && rimraf node_modules"
   },
   "devDependencies": {
     "@commitlint/cli": "17.4.2",
     "@commitlint/config-conventional": "17.4.2",
     "@commitlint/cz-commitlint": "17.4.2",
-    "@eslint/eslintrc": "1.4.1",
-    "@types/eslint": "8.21.0",
-    "@types/eslint-plugin-prettier": "3.1.0",
-    "@types/inquirer": "9.0.3",
-    "@types/node": "18.0.3",
-    "@types/prettier": "^2.7.2",
-    "@types/react": "18.0.15",
-    "@types/react-dom": "18.0.6",
-    "@typescript-eslint/eslint-plugin": "5.51.0",
-    "@typescript-eslint/parser": "5.51.0",
-    "autoprefixer": "^10.4.7",
     "commitizen": "4.3.0",
     "cz-customizable": "7.0.0",
-    "eslint": "8.19.0",
-    "eslint-config-next": "latest",
-    "eslint-config-prettier": "8.6.0",
-    "eslint-import-resolver-typescript": "3.5.3",
-    "eslint-plugin-html": "7.1.0",
-    "eslint-plugin-import": "2.27.5",
-    "eslint-plugin-jsx-a11y": "6.7.1",
-    "eslint-plugin-prefer-arrow": "1.2.3",
-    "eslint-plugin-prettier": "4.2.1",
-    "eslint-plugin-react": "7.32.2",
-    "eslint-plugin-react-hooks": "4.6.0",
-    "eslint-plugin-tailwindcss": "3.8.3",
     "husky": "8.0.3",
     "inquirer": "8.0.0",
-    "lint-staged": "13.1.1",
-    "npm-run-all": "4.1.5",
-    "postcss": "^8.4.14",
-    "prettier": "^2.7.1",
-    "prettier-plugin-tailwindcss": "^0.1.13",
-    "stylelint": "14.16.1",
-    "stylelint-config-recommended": "9.0.0",
-    "stylelint-config-recommended-scss": "8.0.0",
-    "stylelint-scss": "4.3.0",
-    "tailwindcss": "^3.1.6",
-    "typescript": "4.7.4",
-    "typesync": "0.10.0"
-  },
-  "lint-staged": {
-    "{src,test}/**/*.{ts,js,jsx,tsx,json,html}": [
-      "prettier --write --loglevel=error",
-      "eslint --fix"
-    ],
-    "**/*.{css,scss,sass}": [
-      "stylelint"
-    ]
+    "lint-staged": "^13.1.1",
+    "rimraf": "^4.1.2",
+    "turbo": "^1.7.3"
   }
 }
