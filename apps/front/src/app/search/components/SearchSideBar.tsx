@@ -2,8 +2,6 @@ import { Location, Cuisine, PRICE } from 'database';
 import Link from 'next/link';
 import { FC } from 'react';
 
-import { SearchProps } from '../page';
-
 type SearchBarProps = {
   locations: Location[];
   cuisines: Cuisine[];

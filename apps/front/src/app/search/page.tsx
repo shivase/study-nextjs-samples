@@ -1,5 +1,3 @@
-import { serialize } from 'v8';
-
 import { PRICE, PrismaClient } from 'database';
 
 import Header from './components/Header';

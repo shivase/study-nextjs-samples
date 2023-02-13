@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import ErrorImage from '~/icons/error.png';
 
-const NotFoundError = ({ error }: { error: Error }) => {
+const NotFoundError = () => {
   return (
     <div className="flex h-screen flex-col items-center justify-center bg-gray-200">
       <Image src={ErrorImage} alt="" className="mb-8 w-56" />
