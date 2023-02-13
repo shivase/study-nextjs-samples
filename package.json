@@ -9,6 +9,7 @@
   "scripts": {
     "prepare": "husky install",
     "db:generate": "turbo db:generate",
+    "db:push": "turbo db:push",
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "start": "turbo run start --parallel",

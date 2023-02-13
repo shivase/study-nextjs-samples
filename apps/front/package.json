@@ -9,7 +9,7 @@
     "lint:eslint": "eslint --fix '{src,test}/**/*.{js,jsx,ts,tsx,json,html}'",
     "lint:prettier": "prettier --no-error-on-unmatched-pattern --write {src,test}/**/*.{json,js,jsx,ts,tsx,md,html}",
     "lint:css": "stylelint --fix **/*.{css,scss,sass}",
-    "clean": "rimraf node_modules dist .next"
+    "clean": "rimraf node_modules dist .next .turbo"
   },
   "dependencies": {
     "clsx": "1.2.1",

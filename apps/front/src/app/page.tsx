@@ -15,6 +15,7 @@ const fetchRestaurants = async () => {
       slug: true,
       location: true,
       price: true,
+      reviews: true,
     },
   });
 
@@ -23,8 +24,6 @@ const fetchRestaurants = async () => {
 
 const Home = async () => {
   const restaurants = await fetchRestaurants();
-
-  console.log(restaurants);
 
   return (
     <main>
