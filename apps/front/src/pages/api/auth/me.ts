@@ -18,7 +18,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       email: payload.email,
     },
     select: {
-      id: true,
       first_name: true,
       last_name: true,
       email: true,
@@ -27,7 +26,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     },
   });
 
-  return res.json({ user });
+  return res.json(user);
 };
 
 export default handler;

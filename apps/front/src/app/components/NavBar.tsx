@@ -1,19 +1,40 @@
+'use client';
 import Link from 'next/link';
+import { useContext } from 'react';
+
+import { AuthenticationContext } from '@/context/AuthContext';
+import useAuth from '@/hooks/useAuth';
 
 import AuthModal from './AuthModal';
 
 const NavBar = () => {
+  const { data, loading } = useContext(AuthenticationContext);
+  const { signout } = useAuth();
+
+  const handler = () => {
+    signout();
+  };
+
   return (
     <nav className="flex justify-between bg-white p-2">
       <Link href="" className="text-2xl font-bold text-gray-700">
-        {' '}
-        OpenTable{' '}
+        OpenTable
       </Link>
       <div>
-        <div className="flex">
-          <AuthModal isSignIn={true} />
-          <AuthModal isSignIn={false} />
-        </div>
+        {!loading && (
+          <div className="flex">
+            {data ? (
+              <button className="rounded border bg-blue-400 p-1 px-4 text-white" onClick={handler}>
+                Signout
+              </button>
+            ) : (
+              <>
+                <AuthModal isSignIn={true} />
+                <AuthModal isSignIn={false} />
+              </>
+            )}
+          </div>
+        )}
       </div>
     </nav>
   );

@@ -29,7 +29,8 @@ const Stars: FC<StarsProps> = ({ reviews, rating }) => {
     }
 
     return stars.map((star) => {
-      return <Image key={star.src} src={star} alt="" className="mr-1 h-4 w-4" />;
+      // eslint-disable-next-line react/jsx-key
+      return <Image src={star} alt="" className="mr-1 h-4 w-4" />;
     });
   };
 
