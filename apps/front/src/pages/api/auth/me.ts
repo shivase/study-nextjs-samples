@@ -1,8 +1,7 @@
-import { PrismaClient } from 'database';
 import jwt from 'jsonwebtoken';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const prisma = new PrismaClient();
+import { prisma } from '@/lib/prisma';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const bearerToken = req.headers['authorization'] as string;

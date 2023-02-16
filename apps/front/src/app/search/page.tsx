@@ -1,10 +1,10 @@
-import { PRICE, PrismaClient } from 'database';
+import { PRICE } from 'database';
+
+import { prisma } from '@/lib/prisma';
 
 import Header from './components/Header';
 import RestaurantCard from './components/RestaurantCard';
 import SearchSideBar from './components/SearchSideBar';
-
-const prisma = new PrismaClient();
 
 type SearchParams = {
   city?: string;

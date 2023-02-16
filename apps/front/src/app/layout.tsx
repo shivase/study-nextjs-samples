@@ -2,6 +2,7 @@ import AuthContext from '../context/AuthContext';
 
 import NavBar from './components/NavBar';
 import './globals.css';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (

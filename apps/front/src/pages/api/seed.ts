@@ -1,16 +1,16 @@
 /* eslint-disable complexity */
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { PRICE, PrismaClient } from 'database';
+import { PRICE } from 'database';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-const prisma = new PrismaClient();
+import { prisma } from '@/lib/prisma';
 
 type Data = {
   name: string;
 };
 
 export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
-  //   await prisma.table.deleteMany();
+  await prisma.table.deleteMany();
   await prisma.review.deleteMany();
   await prisma.item.deleteMany();
   await prisma.restaurant.deleteMany();
@@ -1236,22 +1236,22 @@ export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       },
     ],
   });
-  // await prisma.table.createMany({
-  //   data: [
-  //     {
-  //       restaurant_id: vivaanId,
-  //       seats: 4,
-  //     },
-  //     {
-  //       restaurant_id: vivaanId,
-  //       seats: 4,
-  //     },
-  //     {
-  //       restaurant_id: vivaanId,
-  //       seats: 2,
-  //     },
-  //   ],
-  // });
+  await prisma.table.createMany({
+    data: [
+      {
+        restaurant_id: vivaanId,
+        seats: 4,
+      },
+      {
+        restaurant_id: vivaanId,
+        seats: 4,
+      },
+      {
+        restaurant_id: vivaanId,
+        seats: 2,
+      },
+    ],
+  });
 
   res.status(200).json({ name: 'hello' });
 };

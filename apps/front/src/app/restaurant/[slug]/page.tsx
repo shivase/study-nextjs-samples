@@ -1,5 +1,7 @@
-import { PrismaClient, Review } from 'database';
 import { notFound } from 'next/navigation';
+
+import { RestaurantInfo } from '@/app/types';
+import { prisma } from '@/lib/prisma';
 
 import Description from './components/Description';
 import Images from './components/Images';
@@ -9,18 +11,7 @@ import RestaurantNavBar from './components/RestaurantNavBar';
 import Reviews from './components/Reviews';
 import Title from './components/Title';
 
-type Restaurant = {
-  id: number;
-  name: string;
-  images: string[];
-  description: string;
-  slug: string;
-  reviews: Review[];
-};
-
-const prisma = new PrismaClient();
-
-const fetchRestaurantBySlug = async (slug: string): Promise<Restaurant> => {
+const fetchRestaurantBySlug = async (slug: string): Promise<RestaurantInfo> => {
   const restaurant = await prisma.restaurant.findUnique({
     where: {
       slug,
@@ -32,6 +23,8 @@ const fetchRestaurantBySlug = async (slug: string): Promise<Restaurant> => {
       description: true,
       slug: true,
       reviews: true,
+      open_time: true,
+      close_time: true,
     },
   });
 
@@ -56,7 +49,11 @@ const RestaurantDetails = async ({ params }: { params: { slug: string } }) => {
         <Reviews reviews={restaurant.reviews} />
       </div>
       <div className="relative w-[27%] text-reg">
-        <ReservationCard />
+        <ReservationCard
+          open_time={restaurant.open_time}
+          close_time={restaurant.close_time}
+          slug={restaurant.slug}
+        />
       </div>
     </>
   );

@@ -1,9 +1,6 @@
-import { PrismaClient } from 'database';
-
 import Header from '@/app/components/Header';
 import RestaurantCard from '@/app/components/RestaurantCard';
-
-const prisma = new PrismaClient();
+import { prisma } from '@/lib/prisma';
 
 const fetchRestaurants = async () => {
   const restaurants = await prisma.restaurant.findMany({

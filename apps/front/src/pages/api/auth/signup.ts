@@ -1,11 +1,10 @@
 import bcrypt from 'bcrypt';
 import { setCookie } from 'cookies-next';
-import { PrismaClient } from 'database';
 import * as jose from 'jose';
 import { NextApiRequest, NextApiResponse } from 'next';
 import validator from 'validator';
 
-const prisma = new PrismaClient();
+import { prisma } from '@/lib/prisma';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
