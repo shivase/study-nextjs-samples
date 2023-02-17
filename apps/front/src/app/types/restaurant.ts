@@ -1,6 +1,6 @@
 import { Restaurant, Review } from 'database';
 
-import { Time } from '../utils/21.1 convertToDisplayTime';
+import { Time } from '../utils/convertToDisplayTime';
 
 export type RestaurantInfo = {
   reviews: Review[];

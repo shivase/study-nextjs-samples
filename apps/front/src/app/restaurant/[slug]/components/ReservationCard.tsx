@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { FC, useState } from 'react';
 import DatePicker from 'react-datepicker';
 
-import { convertToDisplayTime } from '@/app/utils/21.1 convertToDisplayTime';
+import { convertToDisplayTime } from '@/app/utils/convertToDisplayTime';
 import { partySizes, times } from '@/data';
 import useAvailabilities from '@/hooks/useAvailabilities';
 
