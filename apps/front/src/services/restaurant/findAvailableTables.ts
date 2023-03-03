@@ -1,8 +1,8 @@
 import { Table } from 'database';
 import { NextApiResponse } from 'next';
 
-import { times } from '@/data';
-import { prisma } from '@/lib/prisma';
+import { times } from '@/app/open-table/data';
+import { prisma } from '@/app/open-table/lib/prisma';
 
 export const findAvailableTables = async ({
   time,

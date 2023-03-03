@@ -12,9 +12,9 @@
     "clean": "rimraf node_modules dist .next .turbo"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "@mui/material": "^5.11.8",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/material": "^5.11.11",
     "axios": "^1.3.3",
     "bcrypt": "^5.1.0",
     "clsx": "1.2.1",
@@ -27,6 +27,7 @@
     "react": "18.2.0",
     "react-datepicker": "^4.10.0",
     "react-dom": "18.2.0",
+    "react-icons": "^4.7.1",
     "styled-components": "6.0.0-beta.2",
     "styled-jsx": "5.1.0",
     "use-count-up": "3.0.1",

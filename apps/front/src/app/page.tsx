@@ -1,37 +1,20 @@
-import Header from '@/app/components/Header';
-import RestaurantCard from '@/app/components/RestaurantCard';
-import { prisma } from '@/lib/prisma';
+import Link from 'next/link';
 
-const fetchRestaurants = async () => {
-  const restaurants = await prisma.restaurant.findMany({
-    select: {
-      id: true,
-      name: true,
-      main_image: true,
-      cuisine: true,
-      slug: true,
-      location: true,
-      price: true,
-      reviews: true,
-    },
-  });
-
-  return restaurants;
-};
-
-const Home = async () => {
-  const restaurants = await fetchRestaurants();
+export default async () => {
+  const buttonClass = 'rounded-xl border-4 border-solid border-lime-800 py-2 px-6';
 
   return (
-    <main>
-      <Header />
-      <div className="mt-10 flex flex-wrap justify-center py-3 px-36">
-        {restaurants.map((restaurant) => (
-          <RestaurantCard key={restaurant.id} restaurant={restaurant} />
-        ))}
+    <div className="mt-16 flex flex-col items-center space-y-10">
+      <div className="flex flex-col space-y-4">
+        <div className="mb-2 text-center">
+          The Next.js 13 Bootcamp - The Complete Developer Guide
+        </div>
+        <div className="flex flex-wrap items-center justify-center gap-5">
+          <Link href="/open-table">
+            <button className={buttonClass}>Open Table</button>
+          </Link>
+        </div>
       </div>
-    </main>
+    </div>
   );
 };
-
-export default Home;
