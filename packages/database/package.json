@@ -12,7 +12,7 @@
     "generate": "prisma generate",
     "push": "prisma db push --skip-generate",
     "clean": "rimraf node_modules .turbo dist",
-    "prebuild": "pnpm generate"
+    "postinstall": "pnpm generate"
   },
   "dependencies": {
     "@prisma/client": "latest"
