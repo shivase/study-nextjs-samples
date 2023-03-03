@@ -36,6 +36,7 @@
   "devDependencies": {
     "@babel/core": "^7.20.12",
     "@eslint/eslintrc": "1.4.1",
+    "@netlify/plugin-nextjs": "^4.30.4",
     "@tsconfig/next": "^1.0.5",
     "@types/babel__core": "^7.20.0",
     "@types/bcrypt": "^5.0.0",

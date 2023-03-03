@@ -2,7 +2,7 @@ import { Review } from 'database';
 import { FC } from 'react';
 
 import Stars from '@/app/open-table/components/Stars';
-import { calculateReviewRatingAverage } from '@/utils/calculateReviewRatingAverage';
+import { calculateReviewRatingAverage } from '@/app/open-table/utils/calculateReviewRatingAverage';
 
 type RatingProps = {
   reviews: Review[];

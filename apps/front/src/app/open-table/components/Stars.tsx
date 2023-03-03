@@ -2,7 +2,7 @@ import { Review } from 'database';
 import Image from 'next/image';
 import { FC } from 'react';
 
-import { calculateReviewRatingAverage } from '@/utils/calculateReviewRatingAverage';
+import { calculateReviewRatingAverage } from '@/app/open-table/utils/calculateReviewRatingAverage';
 import emptyStart from '~/icons/empty-star.png';
 import fullStart from '~/icons/full-star.png';
 import halfStart from '~/icons/half-star.png';

@@ -3,7 +3,7 @@ import { Booking } from 'database';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { prisma } from '@/app/open-table/lib/prisma';
-import { findAvailableTables } from '@/services/restaurant/findAvailableTables';
+import { findAvailableTables } from '@/app/open-table/services/restaurant/findAvailableTables';
 
 type ReserveQueryDAO = {
   slug: string;

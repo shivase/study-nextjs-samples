@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { FC } from 'react';
 
 import Stars from '@/app/open-table/components/Stars';
-import { calculateReviewRatingAverage } from '@/utils/calculateReviewRatingAverage';
+import { calculateReviewRatingAverage } from '@/app/open-table/utils/calculateReviewRatingAverage';
 
 import Price from '../../components/Price';
 
