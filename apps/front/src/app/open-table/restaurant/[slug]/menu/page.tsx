@@ -5,6 +5,8 @@ import { prisma } from '@/app/open-table/lib/prisma';
 import Menu from '../components/Menu';
 import RestaurantNavBar from '../components/RestaurantNavBar';
 
+export const dynamic = 'force-dynamic';
+
 const fetchItems = async (slug: string): Promise<Item[]> => {
   const restaurant = await prisma.restaurant.findUnique({
     where: {

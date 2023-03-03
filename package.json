@@ -1,5 +1,5 @@
 {
-  "name": "udemy-nextjs-13-bootcamp",
+  "name": "study-nextjs-samples",
   "version": "0.0.0",
   "license": "MIT",
   "workspaces": [
@@ -11,8 +11,8 @@
     "db:generate": "turbo db:generate",
     "db:push": "turbo db:push",
     "build": "turbo run build",
-    "dev": "turbo run dev --parallel",
-    "start": "turbo run start --parallel",
+    "dev": "turbo run dev",
+    "start": "turbo run start",
     "lint": "turbo run lint",
     "clean": "turbo run clean && rimraf node_modules"
   },

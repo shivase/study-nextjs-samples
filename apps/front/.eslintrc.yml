@@ -39,7 +39,9 @@ overrides:
       - plugin:@typescript-eslint/recommended
       - plugin:tailwindcss/recommended
       - plugin:prettier/recommended
+      - plugin:@next/next/recommended
     rules:
+      '@next/next/no-img-element': 'off'
       '@typescript-eslint/explicit-function-return-type':
         - 'off'
       '@typescript-eslint/explicit-module-boundary-types':
