@@ -1,10 +1,13 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  productionBrowserSourceMaps: true,
   reactStrictMode: true,
+  swcMinify: true,
   experimental: {
     appDir: true,
+  },
+  images: {
+    domains: ['image.tmdb.org'],
   },
 };
 
