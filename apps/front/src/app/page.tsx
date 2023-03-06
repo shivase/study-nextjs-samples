@@ -24,6 +24,11 @@ const TopPage = () => {
             <button className={buttonClass}>IMDB Clone</button>
           </Link>
         </div>
+        <div className="flex flex-wrap items-center justify-center gap-5">
+          <Link href="/google-clone">
+            <button className={buttonClass}>Google Clone</button>
+          </Link>
+        </div>
       </div>
     </div>
   );

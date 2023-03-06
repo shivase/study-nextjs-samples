@@ -1,0 +1,17 @@
+/* stylelint-disable scss/at-rule-no-unknown */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply h-10 w-36 rounded-md bg-[#f8f9fa] text-sm text-gray-800 transition-shadow hover:shadow-md hover:ring-1 hover:ring-gray-200 focus:outline-none active:ring-gray-300;
+  }
+  .link {
+    @apply cursor-pointer hover:underline;
+  }
+
+  .header-icon {
+    @apply cursor-pointer rounded-full bg-transparent p-2 text-4xl hover:bg-gray-200;
+  }
+}

@@ -1,6 +1,6 @@
-import './globals.css';
 import Link from 'next/link';
 import { FaHome } from 'react-icons/fa';
+import './globals.css';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (

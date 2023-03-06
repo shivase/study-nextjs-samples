@@ -2,6 +2,9 @@
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
+  fontFamily: {
+    sans: ['Bai Jamjuree', 'sans-serif'],
+  },
   theme: {
     extend: {},
     fontSize: {
