@@ -36,7 +36,7 @@ const HomeSearch = () => {
           onChange={(e) => setInput(e.target.value)}
           value={input}
           type="text"
-          className="grow focus:outline-none"
+          className="grow border-none focus:outline-none focus:ring-0"
         />
         <BsFillMicFill className="text-lg" />
       </form>

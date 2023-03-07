@@ -21,7 +21,7 @@ export const SearchBox = () => {
         type="text"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="h-14 w-full flex-1 rounded-sm bg-transparent outline-none placeholder:text-gray-500"
+        className="h-14 w-full flex-1 rounded-sm border-0 bg-transparent outline-none placeholder:text-gray-500 focus:ring-0"
         placeholder="Search keywords..."
       />
       <button disabled={!search} type="submit" className="text-amber-600 disabled:text-gray-400">

@@ -26,7 +26,7 @@ const SearchBox = () => {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         type="text"
-        className="w-full focus:outline-none"
+        className="w-full border-none focus:outline-none focus:ring-0"
       />
 
       <RxCross2

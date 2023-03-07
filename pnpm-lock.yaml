@@ -34,6 +34,7 @@ importers:
       '@eslint/eslintrc': 1.4.1
       '@mui/material': ^5.11.11
       '@netlify/plugin-nextjs': ^4.30.4
+      '@tailwindcss/forms': ^0.5.3
       '@tailwindcss/line-clamp': ^0.4.2
       '@tsconfig/next': ^1.0.5
       '@types/babel__core': ^7.20.0
@@ -120,6 +121,7 @@ importers:
       '@babel/core': 7.20.12
       '@eslint/eslintrc': 1.4.1
       '@netlify/plugin-nextjs': 4.30.4
+      '@tailwindcss/forms': 0.5.3_tailwindcss@3.2.6
       '@tsconfig/next': 1.0.5
       '@types/babel__core': 7.20.0
       '@types/bcrypt': 5.0.0
@@ -3052,6 +3054,15 @@ packages:
     dependencies:
       tslib: 2.5.0
     dev: false
+
+  /@tailwindcss/forms/0.5.3_tailwindcss@3.2.6:
+    resolution: {integrity: sha512-y5mb86JUoiUgBjY/o6FJSFZSEttfb3Q5gllE4xoKjAAD+vBrnIhE4dViwUuow3va8mpH4s9jyUbUbrRGoRdc2Q==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1'
+    dependencies:
+      mini-svg-data-uri: 1.4.4
+      tailwindcss: 3.2.6_postcss@8.4.21
+    dev: true
 
   /@tailwindcss/line-clamp/0.4.2_tailwindcss@3.2.6:
     resolution: {integrity: sha512-HFzAQuqYCjyy/SX9sLGB1lroPzmcnWv1FHkIpmypte10hptf4oPUfucryMKovZh2u0uiS9U5Ty3GghWfEJGwVw==}
@@ -6652,6 +6663,11 @@ packages:
   /min-indent/1.0.1:
     resolution: {integrity: sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==}
     engines: {node: '>=4'}
+    dev: true
+
+  /mini-svg-data-uri/1.4.4:
+    resolution: {integrity: sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==}
+    hasBin: true
     dev: true
 
   /minimatch/3.1.2:
