@@ -1,6 +1,6 @@
 import { useTheme } from 'next-themes';
 
-export default () => {
+const useThemes = () => {
   const { systemTheme, theme, setTheme } = useTheme();
 
   const currentTheme = theme === 'system' ? systemTheme : theme;
@@ -10,3 +10,5 @@ export default () => {
     setTheme,
   };
 };
+
+export default useThemes;

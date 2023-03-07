@@ -9,7 +9,7 @@ type Data = {
   name: string;
 };
 
-export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
+const setup = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   await prisma.table.deleteMany();
   await prisma.review.deleteMany();
   await prisma.item.deleteMany();
@@ -1255,3 +1255,5 @@ export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 
   res.status(200).json({ name: 'hello' });
 };
+
+export default setup;
