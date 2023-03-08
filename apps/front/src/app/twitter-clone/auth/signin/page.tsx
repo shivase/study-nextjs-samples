@@ -2,8 +2,6 @@ import { getProviders } from 'next-auth/react';
 
 import SignInButton from './components/SignInButton';
 
-export const dynamic = 'force-dynamic';
-
 const getProvider = async () => {
   return await getProviders();
 };
