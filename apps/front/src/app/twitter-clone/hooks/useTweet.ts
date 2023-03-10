@@ -11,13 +11,13 @@ import {
   setDoc,
   updateDoc,
 } from 'firebase/firestore';
-import { getDownloadURL, ref, uploadString } from 'firebase/storage';
+import { deleteObject, getDownloadURL, ref, uploadString } from 'firebase/storage';
 import { signIn, useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 
 import { db, storage } from '@/config/firebase';
 
-export const useTweetPost = () => {
+export const useTweet = () => {
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState<DocumentData[]>([]);
@@ -56,6 +56,13 @@ export const useTweetPost = () => {
     setLoading(false);
   };
 
+  const deleteTweet = async (postId: string) => {
+    if (window.confirm('Are you sure you want to delete this post?')) {
+      await deleteDoc(doc(db, 'posts', postId));
+      await deleteObject(ref(storage, `posts/${postId}/image`));
+    }
+  };
+
   const likePost = async (postId: string) => {
     if (session?.user?.uid) {
       await setDoc(doc(db, 'posts', postId, 'likes', session.user.uid), {
@@ -78,6 +85,7 @@ export const useTweetPost = () => {
     loading,
     posts,
     sendTweet,
+    deleteTweet,
     likePost,
     unlikePost,
   };

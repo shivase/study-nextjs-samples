@@ -4,14 +4,14 @@ import { useSession } from 'next-auth/react';
 import { ChangeEvent, useRef, useState } from 'react';
 import { HiOutlineEmojiHappy, HiOutlinePhotograph, HiOutlineXCircle } from 'react-icons/hi';
 
-import { useTweetPost } from '../hooks/useTweetPost';
+import { useTweet } from '../hooks/useTweet';
 
 const Input = () => {
   const { data: session } = useSession();
   const [input, setInput] = useState('');
   const [selectedFile, setSelectedFile] = useState<string | undefined>(undefined);
   const filePickerRef = useRef<HTMLInputElement>(null);
-  const { loading, sendTweet } = useTweetPost();
+  const { loading, sendTweet } = useTweet();
 
   const sendTweetHandler = async () => {
     sendTweet(input, selectedFile);

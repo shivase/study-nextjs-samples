@@ -15,12 +15,13 @@ import Moment from 'react-moment';
 
 import { db } from '@/config/firebase';
 
-import { useTweetPost } from '../hooks/useTweetPost';
+import { useTweet } from '../hooks/useTweet';
+import { TweetPost } from '../types';
 
 const Post = ({ post }: { post: DocumentData }) => {
   const { data: session } = useSession();
-  const tweet = post.data();
-  const { likePost, unlikePost } = useTweetPost();
+  const tweet = post.data() as TweetPost;
+  const { likePost, unlikePost, deleteTweet } = useTweet();
   const [likes, setLikes] = useState<DocumentData[]>([]);
   const [hasLiked, setHasLiked] = useState(false);
 
@@ -51,7 +52,12 @@ const Post = ({ post }: { post: DocumentData }) => {
         {tweet.image && <img className="ml-2 rounded-2xl" src={tweet.image} alt="post-img" />}
         <div className="flex justify-between p-2 text-gray-500">
           <HiOutlineChat className="hover-effect h-9 w-9 p-2 hover:bg-sky-100 hover:text-sky-500" />
-          <HiOutlineTrash className="hover-effect h-9 w-9 p-2 hover:bg-red-100 hover:text-red-600" />
+          {session?.user.uid === tweet.id && (
+            <HiOutlineTrash
+              onClick={() => deleteTweet(post.id)}
+              className="hover-effect h-9 w-9 p-2 hover:bg-red-100 hover:text-red-600"
+            />
+          )}
           <div className="flex items-center">
             {hasLiked ? (
               <HiHeart

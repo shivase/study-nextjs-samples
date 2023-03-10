@@ -1,13 +1,13 @@
 'use client';
 import { HiOutlineSparkles } from 'react-icons/hi';
 
-import { useTweetPost } from '../hooks/useTweetPost';
+import { useTweet } from '../hooks/useTweet';
 
 import Input from './Input';
 import Post from './Post';
 
 const Feed = () => {
-  const { posts } = useTweetPost();
+  const { posts } = useTweet();
 
   return (
     <div className="max-w-xl grow border-x sm:ml-[73px] lg:ml-[370px] lg:min-w-[576px]">
