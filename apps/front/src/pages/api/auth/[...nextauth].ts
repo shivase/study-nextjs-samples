@@ -13,6 +13,14 @@ const auth = NextAuth({
   pages: {
     signIn: '/twitter-clone/auth/signin',
   },
+  callbacks: {
+    session: async ({ session, token }) => {
+      session.user.username = session.user.name?.split(' ').join('').toLowerCase();
+      session.user.uid = token.sub;
+
+      return session;
+    },
+  },
 });
 
 export default auth;
