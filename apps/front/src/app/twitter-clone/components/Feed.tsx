@@ -7,7 +7,7 @@ import Input from './Input';
 import Post from './Post';
 
 const Feed = () => {
-  const { posts, loading } = useTweetPost();
+  const { posts } = useTweetPost();
 
   return (
     <div className="max-w-xl grow border-x sm:ml-[73px] lg:ml-[370px] lg:min-w-[576px]">
@@ -18,7 +18,9 @@ const Feed = () => {
         </div>
       </div>
       <Input />
-      {!loading && posts.map((post) => <Post key={post.data().id} post={post.data()} />)}
+      {posts.map((post) => (
+        <Post key={post.id} post={post} />
+      ))}
     </div>
   );
 };

@@ -2,17 +2,18 @@ import {
   DocumentData,
   addDoc,
   collection,
+  deleteDoc,
   doc,
   onSnapshot,
   orderBy,
   query,
   serverTimestamp,
+  setDoc,
   updateDoc,
 } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadString } from 'firebase/storage';
-import { useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 import { db, storage } from '@/config/firebase';
 
@@ -33,7 +34,7 @@ export const useTweetPost = () => {
     setLoading(true);
 
     const docRef = await addDoc(collection(db, 'posts'), {
-      id: uuidv4(),
+      id: session?.user.uid,
       name: session?.user.name,
       username: session?.user.username,
       userImg: session?.user.image,
@@ -55,9 +56,29 @@ export const useTweetPost = () => {
     setLoading(false);
   };
 
+  const likePost = async (postId: string) => {
+    if (session?.user?.uid) {
+      await setDoc(doc(db, 'posts', postId, 'likes', session.user.uid), {
+        username: session?.user.username,
+      });
+    } else {
+      signIn();
+    }
+  };
+
+  const unlikePost = async (postId: string) => {
+    if (session?.user?.uid) {
+      await deleteDoc(doc(db, 'posts', postId, 'likes', session.user.uid));
+    } else {
+      signIn();
+    }
+  };
+
   return {
     loading,
     posts,
     sendTweet,
+    likePost,
+    unlikePost,
   };
 };
