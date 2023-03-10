@@ -1,13 +1,11 @@
-import { getProviders } from 'next-auth/react';
+'use client';
+import { getProviders, signIn } from 'next-auth/react';
+import useSWR from 'swr';
 
-import SignInButton from './components/SignInButton';
+const AuthSignIn = () => {
+  const { data: providers, error } = useSWR('/api/auth/providers', () => getProviders());
 
-const getProvider = async () => {
-  return await getProviders();
-};
-
-const AuthSignIn = async () => {
-  const providers = await getProvider();
+  if (error) return <p>Error : {error}</p>;
 
   return (
     <div className="mt-20 flex justify-center space-x-4">
@@ -28,7 +26,11 @@ const AuthSignIn = async () => {
               <p className="my-10 text-center text-sm italic">
                 This app is created for learning purpose
               </p>
-              <SignInButton provider={provider} />
+              <button
+                onClick={() => signIn(provider.id, { callbackUrl: '/twitter-clone' })}
+                className="rounded-lg bg-red-400 p-3 text-white hover:bg-red-500">
+                Sign in with {provider.name}
+              </button>
             </div>
           ))}
       </div>
