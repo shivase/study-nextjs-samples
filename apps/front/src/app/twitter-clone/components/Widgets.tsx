@@ -1,4 +1,5 @@
 'use client';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { HiOutlineSearch } from 'react-icons/hi';
 
@@ -24,9 +25,18 @@ const Widgets = ({ news, users }: { news: NewsType; users: User[] }) => {
       </div>
       <div className="w-[90%] space-y-3 rounded-xl bg-gray-100 pt-2 text-gray-700 lg:w-[75%]">
         <h4 className="px-4 text-lg font-bold">What's happening</h4>
-        {news.articles.slice(0, articleNum).map((article) => (
-          <News key={article.title} article={article} />
-        ))}
+        <AnimatePresence>
+          {news.articles.slice(0, articleNum).map((article) => (
+            <motion.div
+              key={article.title}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1 }}>
+              <News key={article.title} article={article} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
         <button
           onClick={() => setArticleNum(articleNum + 3)}
           className="pl-4 pb-3 text-blue-300 hover:text-blue-400">
@@ -35,24 +45,33 @@ const Widgets = ({ news, users }: { news: NewsType; users: User[] }) => {
       </div>
       <div className="sticky top-16 w-[90%] space-y-3 rounded-xl bg-gray-100 pt-2 text-gray-700 lg:w-[75%]">
         <h4 className="px-4 text-lg font-bold">Who to Follow</h4>
-        {users.slice(0, userNum).map((user) => (
-          <div
-            key={user.login.username}
-            className="flex cursor-pointer items-start px-4 py-2 hover:bg-gray-200">
-            <img className="rounded-full" src={user.picture.thumbnail} alt="user thumbnail" />
-            <div className="ml-4 truncate leading-5">
-              <h4 className="truncate text-[14px] font-bold hover:underline">
-                {user.login.username}
-              </h4>
-              <h5 className="truncate text-[13px] text-gray-500">
-                {user.name.first + ' ' + user.name.last}{' '}
-              </h5>
-            </div>
-            <button className="ml-auto rounded-full bg-black px-3.5 py-1.5 text-sm font-bold text-white">
-              Follow
-            </button>
-          </div>
-        ))}
+        <AnimatePresence>
+          {users.slice(0, userNum).map((user) => (
+            <motion.div
+              key={user.login.username}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1 }}>
+              <div
+                key={user.login.username}
+                className="flex cursor-pointer items-start px-4 py-2 transition duration-500 ease-out hover:bg-gray-200">
+                <img className="rounded-full" src={user.picture.thumbnail} alt="user thumbnail" />
+                <div className="ml-4 truncate leading-5">
+                  <h4 className="truncate text-[14px] font-bold hover:underline">
+                    {user.login.username}
+                  </h4>
+                  <h5 className="truncate text-[13px] text-gray-500">
+                    {user.name.first + ' ' + user.name.last}{' '}
+                  </h5>
+                </div>
+                <button className="ml-auto rounded-full bg-black px-3.5 py-1.5 text-sm font-bold text-white">
+                  Follow
+                </button>
+              </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
         <button
           onClick={() => setUserNum(userNum + 3)}
           className="pl-4 pb-3 text-blue-300 hover:text-blue-400">
