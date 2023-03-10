@@ -3,9 +3,9 @@ export type TweetPost = {
   name: string;
   username: string;
   userImg: string;
-  img: string;
+  image: string;
   text: string;
-  timestamp: string;
+  timestamp: any;
 };
 
 export type News = {

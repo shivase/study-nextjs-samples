@@ -6,8 +6,9 @@ import {
   HiOutlineShare,
   HiOutlineTrash,
 } from 'react-icons/hi';
+import Moment from 'react-moment';
 
-import type { TweetPost } from '../types';
+import { TweetPost } from '../types';
 
 const Post = ({ post }: { post: TweetPost }) => {
   return (
@@ -18,12 +19,14 @@ const Post = ({ post }: { post: TweetPost }) => {
           <div className="flex items-center space-x-1 whitespace-nowrap">
             <h4 className="text-[15px] font-bold hover:underline sm:text-[16px]">{post.name}</h4>
             <span className="text-sm sm:text-[15px]">@{post.username} - </span>
-            <span className="text-sm hover:underline sm:text-[15px]">{post.timestamp}</span>
+            <span className="text-sm hover:underline sm:text-[15px]">
+              {post.timestamp && <Moment fromNow>{post.timestamp.toDate()}</Moment>}
+            </span>
           </div>
           <HiDotsHorizontal className="hover-effect h-10 w-10 p-2 hover:bg-sky-100 hover:text-sky-500" />
         </div>
         <p className="mb-2 text-[15px] text-gray-800 sm:text-[16px]">{post.text}</p>
-        <img className="ml-2 rounded-2xl" src={post.img} alt="post-img" />
+        {post.image && <img className="ml-2 rounded-2xl" src={post.image} alt="post-img" />}
         <div className="flex justify-between p-2 text-gray-500">
           <HiOutlineChat className="hover-effect h-9 w-9 p-2 hover:bg-sky-100 hover:text-sky-500" />
           <HiOutlineTrash className="hover-effect h-9 w-9 p-2 hover:bg-red-100 hover:text-red-600" />

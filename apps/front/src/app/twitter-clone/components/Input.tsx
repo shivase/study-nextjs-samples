@@ -1,48 +1,23 @@
 'use client';
 import clsx from 'clsx';
-import { addDoc, collection, doc, serverTimestamp, updateDoc } from 'firebase/firestore';
-import { getDownloadURL, ref, uploadString } from 'firebase/storage';
 import { useSession } from 'next-auth/react';
 import { ChangeEvent, useRef, useState } from 'react';
 import { HiOutlineEmojiHappy, HiOutlinePhotograph, HiOutlineXCircle } from 'react-icons/hi';
 
-import { db, storage } from '@/config/firebase';
+import { useTweetPost } from '../hooks/useTweetPost';
 
 const Input = () => {
   const { data: session } = useSession();
   const [input, setInput] = useState('');
-  const [selectedFile, setSelectedFile] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<string | undefined>(undefined);
   const filePickerRef = useRef<HTMLInputElement>(null);
+  const { loading, sendTweet } = useTweetPost();
 
-  const sendTweet = async () => {
-    if (loading) return;
-
-    setLoading(true);
-
-    const docRef = await addDoc(collection(db, 'posts'), {
-      id: session?.user.uid,
-      name: session?.user.name,
-      username: session?.user.username,
-      userImg: session?.user.image,
-      text: input,
-      timestamp: serverTimestamp(),
-    });
-
-    const imageRef = ref(storage, `posts/${docRef.id}/image`);
-
-    if (selectedFile) {
-      await uploadString(imageRef, selectedFile, 'data_url').then(async () => {
-        const downloadURL = await getDownloadURL(imageRef);
-        await updateDoc(doc(db, 'posts', docRef.id), {
-          image: downloadURL,
-        });
-      });
-    }
+  const sendTweetHandler = async () => {
+    sendTweet(input, selectedFile);
 
     setInput('');
-    setSelectedFile(null);
-    setLoading(false);
+    setSelectedFile(undefined);
   };
 
   const addImageToPost = (e: ChangeEvent<HTMLInputElement>) => {
@@ -77,8 +52,8 @@ const Input = () => {
             {selectedFile && (
               <div className="relative">
                 <HiOutlineXCircle
-                  onClick={() => setSelectedFile(null)}
-                  className="absolute right-2 top-2 h-7 w-7 cursor-pointer rounded-full text-white shadow-md shadow-white"
+                  onClick={() => setSelectedFile(undefined)}
+                  className="absolute right-2 top-2 h-7 w-7 cursor-pointer rounded-full text-white shadow-md"
                 />
                 <img
                   className={clsx(loading && 'animate-pulse', 'rounded-lg')}
@@ -99,7 +74,7 @@ const Input = () => {
                   </div>
                   <button
                     className="rounded-full bg-blue-400 px-4 py-1.5 font-bold text-white shadow-md hover:brightness-95 disabled:opacity-50"
-                    onClick={() => sendTweet()}
+                    onClick={sendTweetHandler}
                     disabled={!input.trim()}>
                     Tweet
                   </button>
