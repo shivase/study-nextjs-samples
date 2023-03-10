@@ -54,7 +54,7 @@ const Post = ({ post }: { post: DocumentData }) => {
           <HiOutlineChat className="hover-effect h-9 w-9 p-2 hover:bg-sky-100 hover:text-sky-500" />
           {session?.user.uid === tweet.id && (
             <HiOutlineTrash
-              onClick={() => deleteTweet(post.id)}
+              onClick={() => deleteTweet(post)}
               className="hover-effect h-9 w-9 p-2 hover:bg-red-100 hover:text-red-600"
             />
           )}

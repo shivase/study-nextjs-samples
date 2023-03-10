@@ -56,10 +56,12 @@ export const useTweet = () => {
     setLoading(false);
   };
 
-  const deleteTweet = async (postId: string) => {
+  const deleteTweet = async (post: DocumentData) => {
     if (window.confirm('Are you sure you want to delete this post?')) {
-      await deleteDoc(doc(db, 'posts', postId));
-      await deleteObject(ref(storage, `posts/${postId}/image`));
+      await deleteDoc(doc(db, 'posts', post.id));
+      if (post.data().image) {
+        await deleteObject(ref(storage, `posts/${post.id}/image`));
+      }
     }
   };
 
