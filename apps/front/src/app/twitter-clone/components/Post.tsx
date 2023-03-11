@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { DocumentData, collection, onSnapshot } from 'firebase/firestore';
-import { useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import {
   HiDotsHorizontal,
@@ -12,9 +12,11 @@ import {
   HiOutlineTrash,
 } from 'react-icons/hi';
 import Moment from 'react-moment';
+import { useRecoilState } from 'recoil';
 
 import { db } from '@/config/firebase';
 
+import { modalState, postIdState } from '../atom/modalAtom';
 import { useTweet } from '../hooks/useTweet';
 import { TweetPost } from '../types';
 
@@ -23,11 +25,17 @@ const Post = ({ post }: { post: DocumentData }) => {
   const tweet = post.data() as TweetPost;
   const { likePost, unlikePost, deleteTweet } = useTweet();
   const [likes, setLikes] = useState<DocumentData[]>([]);
+  const [comments, setComments] = useState<DocumentData[]>([]);
   const [hasLiked, setHasLiked] = useState(false);
+  const [open, setOpen] = useRecoilState(modalState);
+  const [postId, setPostId] = useRecoilState(postIdState);
 
   useEffect(() => {
     onSnapshot(collection(db, 'posts', post.id, 'likes'), (snapshot) => setLikes(snapshot.docs));
-  }, []);
+    onSnapshot(collection(db, 'posts', post.id, 'comments'), (snapshot) =>
+      setComments(snapshot.docs),
+    );
+  }, [post.id]);
 
   useEffect(
     () => setHasLiked(likes.findIndex((like) => like.id === session?.user?.uid) !== -1),
@@ -37,7 +45,7 @@ const Post = ({ post }: { post: DocumentData }) => {
   return (
     <div className="flex cursor-pointer border-b border-gray-200 p-3">
       <img className="mr-4 h-11 w-11 rounded-full" src={tweet.userImg} alt="user profile" />
-      <div className="">
+      <div className="flex-1">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-1 whitespace-nowrap">
             <h4 className="text-[15px] font-bold hover:underline sm:text-[16px]">{tweet.name}</h4>
@@ -51,7 +59,20 @@ const Post = ({ post }: { post: DocumentData }) => {
         <p className="mb-2 text-[15px] text-gray-800 sm:text-[16px]">{tweet.text}</p>
         {tweet.image && <img className="ml-2 rounded-2xl" src={tweet.image} alt="post-img" />}
         <div className="flex justify-between p-2 text-gray-500">
-          <HiOutlineChat className="hover-effect h-9 w-9 p-2 hover:bg-sky-100 hover:text-sky-500" />
+          <div className="flex items-center">
+            <HiOutlineChat
+              onClick={() => {
+                if (!session) {
+                  signIn();
+                } else {
+                  setPostId(post.id);
+                  setOpen(!open);
+                }
+              }}
+              className="hover-effect h-9 w-9 p-2 hover:bg-sky-100 hover:text-sky-500"
+            />
+            {comments.length > 0 && <span className="">{comments.length}</span>}
+          </div>
           {session?.user.uid === tweet.id && (
             <HiOutlineTrash
               onClick={() => deleteTweet(post)}

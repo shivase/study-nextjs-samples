@@ -65,6 +65,16 @@ export const useTweet = () => {
     }
   };
 
+  const addComment = async (postId: string, comment: string) => {
+    await addDoc(collection(db, 'posts', postId, 'comments'), {
+      comment: comment,
+      name: session?.user.name,
+      username: session?.user.username,
+      userImg: session?.user.image,
+      timestamp: serverTimestamp(),
+    });
+  };
+
   const likePost = async (postId: string) => {
     if (session?.user?.uid) {
       await setDoc(doc(db, 'posts', postId, 'likes', session.user.uid), {
@@ -87,6 +97,7 @@ export const useTweet = () => {
     loading,
     posts,
     sendTweet,
+    addComment,
     deleteTweet,
     likePost,
     unlikePost,

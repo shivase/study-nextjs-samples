@@ -1,5 +1,5 @@
+import CommentModal from './components/CommentModal';
 import Feed from './components/Feed';
-import Modal from './components/Modal';
 import Sidebar from './components/Sidebar';
 import Widgets from './components/Widgets';
 import { News, User } from './types';
@@ -33,7 +33,7 @@ const TwitterClonePage = async () => {
   const users = await fetchUsers();
 
   return (
-    <main className="mx-auto flex min-h-screen">
+    <main id="twitter-app" className="mx-auto flex min-h-screen">
       {/* Sidebar */}
       <Sidebar />
 
@@ -44,7 +44,7 @@ const TwitterClonePage = async () => {
       <Widgets news={news} users={users} />
 
       {/* Modal */}
-      <Modal />
+      <CommentModal />
     </main>
   );
 };

@@ -1,11 +1,14 @@
+'use client';
+import { RecoilRoot } from 'recoil';
+
 import SessionProviderWrapper from './components/SessionProviderWrapper';
 import './globals.css';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
+    <RecoilRoot>
       <SessionProviderWrapper>{children}</SessionProviderWrapper>
-    </div>
+    </RecoilRoot>
   );
 };
 

@@ -44,7 +44,7 @@ const Input = () => {
             <div className="divide-gray-200">
               <textarea
                 value={input}
-                className="min-h-[50px] w-full border-none text-lg tracking-wide text-gray-700 placeholder:text-gray-700 hover:ring-0"
+                className="min-h-[50px] w-full border-none text-lg tracking-wide text-gray-700 outline-none placeholder:text-gray-300"
                 rows={2}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="What's happening"></textarea>
