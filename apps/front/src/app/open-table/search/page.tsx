@@ -12,7 +12,7 @@ type SearchParams = {
   price?: PRICE;
 };
 
-export const fetchRestaurantByCity = async (searchparams: SearchParams) => {
+const fetchRestaurantByCity = async (searchparams: SearchParams) => {
   const where: any = {};
 
   if (searchparams.city) {

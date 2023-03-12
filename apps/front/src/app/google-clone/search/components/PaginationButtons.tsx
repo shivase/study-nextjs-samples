@@ -8,8 +8,8 @@ const PaginationButtons = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const searchTerm = searchParams.get('searchTerm');
-  const startIndex = searchParams.get('start') ? Number(searchParams.get('start')) : 1;
+  const searchTerm = searchParams?.get('searchTerm');
+  const startIndex = searchParams?.get('start') ? Number(searchParams.get('start')) : 1;
 
   return (
     <div className="flex justify-between px-10 pb-4 text-blue-700 sm:justify-start sm:space-x-44 sm:px-0">

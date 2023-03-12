@@ -8,7 +8,7 @@ import { RxCross2 } from 'react-icons/rx';
 
 const SearchBox = () => {
   const searchParams = useSearchParams();
-  const searchTerm = searchParams.get('searchTerm') ?? '';
+  const searchTerm = searchParams?.get('searchTerm') ?? '';
   const [input, setInput] = useState(searchTerm);
   const router = useRouter();
 

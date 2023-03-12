@@ -6,7 +6,7 @@ import { AiOutlineCamera, AiOutlineSearch } from 'react-icons/ai';
 const SearchHeaderOptions = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const searchTerm = searchParams.get('searchTerm') ?? '';
+  const searchTerm = searchParams?.get('searchTerm') ?? '';
   const router = useRouter();
 
   const selectTab = (tab: string) => {
