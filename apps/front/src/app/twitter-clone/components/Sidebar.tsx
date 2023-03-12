@@ -26,6 +26,7 @@ const Sidebar = () => {
       {/* Twitter Log */}
       <div className="hover-effect p-0 hover:bg-blue-100 lg:px-1">
         <Image
+          priority={true}
           alt="twitter logo"
           width={50}
           height={50}

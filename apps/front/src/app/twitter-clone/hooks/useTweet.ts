@@ -68,6 +68,7 @@ export const useTweet = () => {
   const addComment = async (postId: string, comment: string) => {
     await addDoc(collection(db, 'posts', postId, 'comments'), {
       comment: comment,
+      id: session?.user.uid,
       name: session?.user.name,
       username: session?.user.username,
       userImg: session?.user.image,

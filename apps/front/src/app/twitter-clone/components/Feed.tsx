@@ -11,7 +11,7 @@ const Feed = () => {
   const { posts } = useTweet();
 
   return (
-    <div className="max-w-xl grow border-x sm:ml-[73px] lg:ml-[370px] lg:min-w-[576px]">
+    <>
       <div className="sticky top-0 z-50 flex justify-between border-b border-gray-200 bg-white py-2 px-3">
         <h2 className="cursor-pointer text-lg font-bold sm:text-2xl">Home</h2>
         <div className="hover-effect ml-auto flex h-9 w-9 items-center justify-center px-0">
@@ -27,11 +27,11 @@ const Feed = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}>
-            <Post key={post.id} post={post} />
+            <Post key={post.id} id={post.id} post={post} />
           </motion.div>
         ))}
       </AnimatePresence>
-    </div>
+    </>
   );
 };
 

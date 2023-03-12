@@ -8,6 +8,15 @@ export type TweetPost = {
   timestamp: any;
 };
 
+export type Comment = {
+  id: string;
+  name: string;
+  username: string;
+  timestamp: any;
+  userImg: string;
+  comment: string;
+};
+
 export type News = {
   status: string;
   totalResults: number;
