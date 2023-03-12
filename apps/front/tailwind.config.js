@@ -3,7 +3,8 @@ module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
   fontFamily: {
-    sans: ['Bai Jamjuree', 'sans-serif'],
+    sans: ['var(--font-roboto)'],
+    mono: ['var(--font-roboto-mono)'],
   },
   theme: {
     extend: {},
