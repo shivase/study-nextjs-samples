@@ -58,3 +58,12 @@ export type User = {
     thumbnail: string;
   };
 };
+
+export type UserAuth = {
+  uid: string;
+  name: string;
+  email: string;
+  timestamp: any;
+  userImg: string;
+  username: string;
+};

@@ -1,13 +1,14 @@
 'use client';
 import clsx from 'clsx';
-import { useSession } from 'next-auth/react';
 import { ChangeEvent, useRef, useState } from 'react';
 import { HiOutlineEmojiHappy, HiOutlinePhotograph, HiOutlineXCircle } from 'react-icons/hi';
+import { useRecoilState } from 'recoil';
 
+import { userState } from '../atom/userAtom';
 import { useTweet } from '../hooks/useTweet';
 
 const Input = () => {
-  const { data: session } = useSession();
+  const [currentUser] = useRecoilState(userState);
   const [input, setInput] = useState('');
   const [selectedFile, setSelectedFile] = useState<string | undefined>(undefined);
   const filePickerRef = useRef<HTMLInputElement>(null);
@@ -33,10 +34,10 @@ const Input = () => {
 
   return (
     <>
-      {session?.user?.image && (
+      {currentUser && (
         <div className="flex space-x-3 border-b border-gray-200 p-3">
           <img
-            src={session.user.image}
+            src={currentUser.userImg}
             alt="profile"
             className="h-11 w-11 cursor-pointer rounded-full hover:brightness-95"
           />

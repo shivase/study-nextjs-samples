@@ -1,6 +1,5 @@
 'use client';
 import { DocumentData, doc, onSnapshot } from 'firebase/firestore';
-import { useSession } from 'next-auth/react';
 // eslint-disable-next-line import/order
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
@@ -12,12 +11,13 @@ import { useRecoilState } from 'recoil';
 import { db } from '@/config/firebase';
 
 import { modalState, postIdState } from '../atom/modalAtom';
+import { useAuthentication } from '../hooks/useAuthentication';
 import { useTweet } from '../hooks/useTweet';
 
 Modal.setAppElement('#twitter-app');
 
 const CommentModal = () => {
-  const { data: session } = useSession();
+  const { currentUser } = useAuthentication();
   const [open, setOpen] = useRecoilState(modalState);
   const [postId] = useRecoilState(postIdState);
   const [input, setInput] = useState('');
@@ -54,7 +54,7 @@ const CommentModal = () => {
 
   return (
     <div className="">
-      {open && post && session?.user?.image && (
+      {open && post && currentUser && (
         <Modal
           isOpen={open}
           onRequestClose={() => setOpen(false)}
@@ -90,7 +90,7 @@ const CommentModal = () => {
               </div>
               <div className="flex w-full">
                 <img
-                  src={session.user.image}
+                  src={currentUser.userImg}
                   alt="profile"
                   className="h-11 w-11 cursor-pointer rounded-full hover:brightness-95"
                 />

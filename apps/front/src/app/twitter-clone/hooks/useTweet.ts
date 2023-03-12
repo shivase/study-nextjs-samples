@@ -12,13 +12,15 @@ import {
   updateDoc,
 } from 'firebase/firestore';
 import { deleteObject, getDownloadURL, ref, uploadString } from 'firebase/storage';
-import { signIn, useSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 
 import { db, storage } from '@/config/firebase';
 
+import { useAuthentication } from './useAuthentication';
+
 export const useTweet = () => {
-  const { data: session } = useSession();
+  const { currentUser } = useAuthentication();
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState<DocumentData[]>([]);
 
@@ -34,10 +36,10 @@ export const useTweet = () => {
     setLoading(true);
 
     const docRef = await addDoc(collection(db, 'posts'), {
-      id: session?.user.uid,
-      name: session?.user.name,
-      username: session?.user.username,
-      userImg: session?.user.image,
+      id: currentUser?.uid,
+      name: currentUser?.name,
+      username: currentUser?.username,
+      userImg: currentUser?.userImg,
       text: input,
       timestamp: serverTimestamp(),
     });
@@ -68,18 +70,18 @@ export const useTweet = () => {
   const addComment = async (postId: string, comment: string) => {
     await addDoc(collection(db, 'posts', postId, 'comments'), {
       comment: comment,
-      id: session?.user.uid,
-      name: session?.user.name,
-      username: session?.user.username,
-      userImg: session?.user.image,
+      id: currentUser?.uid,
+      name: currentUser?.name,
+      username: currentUser?.username,
+      userImg: currentUser?.userImg,
       timestamp: serverTimestamp(),
     });
   };
 
   const likePost = async (postId: string) => {
-    if (session?.user?.uid) {
-      await setDoc(doc(db, 'posts', postId, 'likes', session.user.uid), {
-        username: session?.user.username,
+    if (currentUser?.uid) {
+      await setDoc(doc(db, 'posts', postId, 'likes', currentUser.uid), {
+        username: currentUser.username,
       });
     } else {
       signIn();
@@ -87,8 +89,8 @@ export const useTweet = () => {
   };
 
   const unlikePost = async (postId: string) => {
-    if (session?.user?.uid) {
-      await deleteDoc(doc(db, 'posts', postId, 'likes', session.user.uid));
+    if (currentUser?.uid) {
+      await deleteDoc(doc(db, 'posts', postId, 'likes', currentUser.uid));
     } else {
       signIn();
     }

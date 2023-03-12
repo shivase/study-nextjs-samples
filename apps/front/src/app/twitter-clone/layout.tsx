@@ -1,6 +1,8 @@
 'use client';
 import { RecoilRoot } from 'recoil';
 
+// eslint-disable-next-line import/order
+
 import SessionProviderWrapper from './components/SessionProviderWrapper';
 import './globals.css';
 

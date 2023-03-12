@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import clsx from 'clsx';
 import { DocumentData, collection, onSnapshot } from 'firebase/firestore';
-import { signIn, useSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 // eslint-disable-next-line import/order
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -21,11 +21,12 @@ import { useRecoilState } from 'recoil';
 import { db } from '@/config/firebase';
 
 import { modalState, postIdState } from '../atom/modalAtom';
+import { useAuthentication } from '../hooks/useAuthentication';
 import { useTweet } from '../hooks/useTweet';
 import { TweetPost } from '../types';
 
 const Post = ({ post, id }: { post: DocumentData; id: string }) => {
-  const { data: session } = useSession();
+  const { currentUser } = useAuthentication();
   const tweet = post.data() as TweetPost;
   const { likePost, unlikePost, deleteTweet } = useTweet();
   const [likes, setLikes] = useState<DocumentData[]>([]);
@@ -41,8 +42,8 @@ const Post = ({ post, id }: { post: DocumentData; id: string }) => {
   }, [id]);
 
   useEffect(
-    () => setHasLiked(likes.findIndex((like) => like.id === session?.user?.uid) !== -1),
-    [likes, session],
+    () => setHasLiked(likes.findIndex((like) => like.id === currentUser?.uid) !== -1),
+    [likes, currentUser],
   );
 
   return (
@@ -81,7 +82,7 @@ const Post = ({ post, id }: { post: DocumentData; id: string }) => {
               <div className="flex items-center">
                 <HiOutlineChat
                   onClick={() => {
-                    if (!session) {
+                    if (!currentUser) {
                       signIn();
                     } else {
                       setPostId(id);
@@ -92,7 +93,7 @@ const Post = ({ post, id }: { post: DocumentData; id: string }) => {
                 />
                 {comments.length > 0 && <span className="">{comments.length}</span>}
               </div>
-              {session?.user.uid === tweet.id && (
+              {currentUser?.uid === tweet.id && (
                 <HiOutlineTrash
                   onClick={() => {
                     deleteTweet(post);
